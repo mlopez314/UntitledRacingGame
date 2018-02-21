@@ -1,0 +1,78 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+/**
+ * This game state will be used to test added mechanics and game objects.
+ */
+public class TestState {
+  
+  private Player player;
+  private Camera camera;
+  private BufferedImage bg;
+  
+  public TestState() {
+    this.player = new Player(new Vector2D(0, 0));
+    this.camera = new Camera(new Vector2D(0, 0), 0);
+    
+    try {
+      this.bg = ImageIO.read(TestState.class.getResource("/img/neu_map11.png"));
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+  
+  public void update(KeyInputs keyInputs) {
+    if (keyInputs.hasKey(KeyEvent.VK_UP)) {
+      camera.translate(new Vector2D(0, -1));
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_LEFT)) {
+      camera.translate(new Vector2D(-1, 0));
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_DOWN)) {
+      camera.translate(new Vector2D(0, 1));
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_RIGHT)) {
+      camera.translate(new Vector2D(1, 0));
+    }
+    
+    
+    if (keyInputs.hasKey(KeyEvent.VK_W)) {
+      player.setThrottleApplied(true);
+    } else {
+      player.setThrottleApplied(false);
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_A)) {
+      player.steer(false);
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_S) || keyInputs.hasKey(KeyEvent.VK_SPACE)) {
+      player.setBrakeApplied(true);
+    } else {
+      player.setBrakeApplied(false);
+    }
+    
+    if (keyInputs.hasKey(KeyEvent.VK_D)) {
+      player.steer(true);
+    }
+    
+    player.updatePlayer();
+    this.camera.position = new Vector2D(this.player.position.x - 375, this.player.position.y - 375);
+  }
+
+  public void draw(Graphics g) {    
+    g.drawImage(bg, 0 - camera.position.xInt(), 0 - camera.position.yInt(), null);
+    player.draw(g, this.camera);
+  }
+}
