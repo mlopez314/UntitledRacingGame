@@ -28,7 +28,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener {
     addKeyListener(this);
     this.keyInputs = new KeyInputs();
     this.testState = new TestState();
-    this.tm = new Timer(100, this);
+    this.tm = new Timer(10, this);
     this.tm.start();
     this.sysTime = System.nanoTime();
     GameCanvas.DELTA_TIME = 0;

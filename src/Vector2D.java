@@ -37,6 +37,16 @@ public class Vector2D {
   }
   
   /**
+   * Multiplies this Vector2D by a given constant 
+   * 
+   * @param num the constant to multiply with
+   */
+  public void multiply(double num) {
+    this.x *= num;
+    this.y *= num;
+  }
+  
+  /**
    * Normalizes this Vector2D
    * 
    * @return the normalized Vector2D

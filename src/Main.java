@@ -7,7 +7,7 @@ public class Main {
   
   public static void main(String[] args) {
     JFrame frame = new JFrame("O_o");
-    frame.setSize(1000, 1000);
+    frame.setSize(800, 800);
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

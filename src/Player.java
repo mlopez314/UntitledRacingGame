@@ -92,15 +92,15 @@ public class Player {
   
   public void updatePlayer() {
     if (this.throttleApplied && !this.brakeAppied) {
-      this.currSpeed += 10 * GameCanvas.DELTA_TIME;
+      this.currSpeed += 100 * GameCanvas.DELTA_TIME;
     }
     
     if (this.brakeAppied) {
-      this.currSpeed -= 100 * GameCanvas.DELTA_TIME;
+      this.currSpeed -= 1000 * GameCanvas.DELTA_TIME;
     }
     
     if (!this.throttleApplied && !this.brakeAppied) {
-      this.currSpeed -= 10 * GameCanvas.DELTA_TIME;
+      this.currSpeed -= 100 * GameCanvas.DELTA_TIME;
     }
     
     if (this.currSpeed < 0) {

@@ -56,4 +56,23 @@ public class KeyInputs {
   public boolean hasKey(int key) {
     return this.currKeys.contains(key);
   }
+  
+  /**
+   * Checks if every key in the list is in KeyInputs.
+   * 
+   * @param keys the given list of keys
+   * @return true of all keys are in list
+   */
+  public boolean hasKeys(int... keys) {
+    boolean result = true;
+    
+    for (int key : keys) {
+      if (!this.hasKey(key)) {
+        result = false;
+        break;
+      }
+    }
+    
+    return result;
+  }
 }
