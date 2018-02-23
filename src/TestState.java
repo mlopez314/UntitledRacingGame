@@ -1,12 +1,11 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 /**
  * This game state will be used to test added mechanics and game objects.
@@ -30,23 +29,6 @@ public class TestState {
   }
   
   public void update(KeyInputs keyInputs) {
-    if (keyInputs.hasKey(KeyEvent.VK_UP)) {
-      camera.translate(new Vector2D(0, -1));
-    }
-    
-    if (keyInputs.hasKey(KeyEvent.VK_LEFT)) {
-      camera.translate(new Vector2D(-1, 0));
-    }
-    
-    if (keyInputs.hasKey(KeyEvent.VK_DOWN)) {
-      camera.translate(new Vector2D(0, 1));
-    }
-    
-    if (keyInputs.hasKey(KeyEvent.VK_RIGHT)) {
-      camera.translate(new Vector2D(1, 0));
-    }
-    
-    
     if (keyInputs.hasKey(KeyEvent.VK_W)) {
       player.setThrottleApplied(true);
     } else {
@@ -68,11 +50,15 @@ public class TestState {
     }
     
     player.updatePlayer();
-    this.camera.position = new Vector2D(this.player.position.x - 375, this.player.position.y - 375);
+    camera.positionRelativeToPlayer(this.player);
   }
 
   public void draw(Graphics g) {    
     g.drawImage(bg, 0 - camera.position.xInt(), 0 - camera.position.yInt(), null);
     player.draw(g, this.camera);
+    
+    g.setColor(Color.BLACK);
+    g.setFont(new Font("Arial", Font.PLAIN, 25));
+    g.drawString("Speed: " + (int)(player.currSpeed / 5.0) + " km/h", 600, 30);
   }
 }

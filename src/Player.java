@@ -14,6 +14,7 @@ public class Player {
   public Vector2D position;
   public double direction;
   public double currSpeed;
+  
   private boolean throttleApplied;
   private boolean brakeAppied;
   private BufferedImage img;
@@ -75,18 +76,25 @@ public class Player {
    * @param isRight
    */
   public void steer(boolean isRight) {
-    if (isRight) {
-      this.direction += 150 * GameCanvas.DELTA_TIME;
-    } else {
-      this.direction -= 150 * GameCanvas.DELTA_TIME;
-    }
-    
-    while(this.direction < 0) {
-      this.direction += 360;
-    }
-    
-    while(this.direction >= 360) {
-      this.direction -= 360;
+    if (this.currSpeed > 0) {
+      
+      if (this.currSpeed > 250) {
+        this.currSpeed -= 200 * GameCanvas.DELTA_TIME;
+      }
+      
+      if (isRight) {
+        this.direction += 150 * GameCanvas.DELTA_TIME;
+      } else {
+        this.direction -= 150 * GameCanvas.DELTA_TIME;
+      }
+      
+      while(this.direction < 0) {
+        this.direction += 360;
+      }
+
+      while(this.direction >= 360) {
+        this.direction -= 360;
+      }
     }
   }
   
@@ -107,8 +115,8 @@ public class Player {
       this.currSpeed = 0;
     }
     
-    if (this.currSpeed > 400) {
-      this.currSpeed = 400;
+    if (this.currSpeed > 1000) {
+      this.currSpeed = 1000;
     }
     
     Vector2D v = new Vector2D(Math.sin(Math.toRadians(direction)), -Math.cos(Math.toRadians(direction)));

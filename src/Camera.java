@@ -43,4 +43,9 @@ public class Camera {
       this.rotation -= 360;
     }
   }
+
+  public void positionRelativeToPlayer(Player player) {
+    this.position = new Vector2D(player.position.x - (400 - 300 * Math.sin(Math.toRadians(player.direction))), 
+        player.position.y - (700 - 600 * Math.abs(Math.sin(0.5 * Math.toRadians(player.direction)))));
+  }
 }
